@@ -21,7 +21,8 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temperature:temperatureSeries) {
             if (temperature < MIN_TEMPERATURE) {
-                throw new InputMismatchException("There is a temperature lower than the minimum possible");
+                throw new InputMismatchException("There is a temperature " +
+                        "lower than the minimum possible");
             }
         }
         this.capacity = temperatureSeries.length;
@@ -47,8 +48,8 @@ public class TemperatureSeriesAnalysis {
         }
         double devSum = 0.0;
         double avg = this.average();
-        for (double temperature:this.series){
-            devSum += Math.pow(temperature-avg, 2);
+        for (double temperature:this.series) {
+            devSum += (temperature-avg)*(temperature-avg);
         }
         return Math.sqrt(devSum / this.size);
     }
@@ -88,61 +89,62 @@ public class TemperatureSeriesAnalysis {
         if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
-        double closest_dist = Math.abs(this.series[0]-tempValue);
-        double closest_el = this.series[0];
+        double closestDist = Math.abs(this.series[0]-tempValue);
+        double closestEl = this.series[0];
         for (double temperature:this.series) {
-            if (Math.abs(temperature-tempValue) < closest_dist) {
-                closest_el = temperature;
-                closest_dist = Math.abs(temperature-tempValue);
+            if (Math.abs(temperature-tempValue) < closestDist) {
+                closestEl = temperature;
+                closestDist = Math.abs(temperature-tempValue);
             }
-            else if(Math.abs(temperature-tempValue) == closest_dist && temperature > 0.0) {
-                closest_el = temperature;
+            else if (Math.abs(temperature-tempValue) == closestDist
+                     && temperature > 0.0) {
+                closestEl = temperature;
 
             }
         }
-        return closest_el;
+        return closestEl;
     }
 
     public double[] findTempsLessThen(double tempValue) {
         if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
-        int arr_size = 0;
+        int arrSize = 0;
         for (double temperature:this.series) {
             if (temperature < tempValue) {
-                arr_size++;
+                arrSize++;
             }
         }
-        double[] new_arr = new double[arr_size];
+        double[] newArr = new double[arrSize];
         int i = 0;
         for (double temperature:this.series) {
             if (temperature < tempValue) {
-                new_arr[i] = temperature;
+                newArr[i] = temperature;
                 i++;
             }
         }
-        return new_arr;
+        return newArr;
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
         if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
-        int arr_size = 0;
+        int arrSize = 0;
         for (double temperature:this.series) {
             if (temperature > tempValue) {
-                arr_size++;
+                arrSize++;
             }
         }
-        double[] new_arr = new double[arr_size];
+        double[] newArr = new double[arrSize];
         int i = 0;
         for (double temperature:this.series) {
             if (temperature > tempValue) {
-                new_arr[i] = temperature;
+                newArr[i] = temperature;
                 i++;
             }
         }
-        return new_arr;
+        return newArr;
     }
 
 
