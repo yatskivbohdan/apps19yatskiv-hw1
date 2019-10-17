@@ -31,7 +31,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double average() {
-        if (this.size == 0){
+        if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
         double sum = 0.0;
@@ -41,8 +41,8 @@ public class TemperatureSeriesAnalysis {
         return sum/this.series.length;
     }
 
-    public double deviation(){
-        if (this.size == 0){
+    public double deviation() {
+        if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
         double devSum = 0.0;
@@ -54,7 +54,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double min() {
-        if (this.size==0) {
+        if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
         double min = this.series[0];
@@ -72,7 +72,7 @@ public class TemperatureSeriesAnalysis {
         }
         double max = this.series[0];
         for (double temperature:this.series) {
-            if (temperature > max){
+            if (temperature > max) {
                 max = temperature;
             }
         }
@@ -91,11 +91,11 @@ public class TemperatureSeriesAnalysis {
         double closest_dist = Math.abs(this.series[0]-tempValue);
         double closest_el = this.series[0];
         for (double temperature:this.series) {
-            if (Math.abs(temperature-tempValue) < closest_dist){
+            if (Math.abs(temperature-tempValue) < closest_dist) {
                 closest_el = temperature;
                 closest_dist = Math.abs(temperature-tempValue);
             }
-            else if(Math.abs(temperature-tempValue) == closest_dist && temperature > 0) {
+            else if(Math.abs(temperature-tempValue) == closest_dist && temperature > 0.0) {
                 closest_el = temperature;
 
             }
@@ -104,7 +104,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsLessThen(double tempValue) {
-        if (this.size == 0){
+        if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
         int arr_size = 0;
@@ -117,7 +117,7 @@ public class TemperatureSeriesAnalysis {
         int i = 0;
         for (double temperature:this.series) {
             if (temperature < tempValue) {
-                new_arr[i]=temperature;
+                new_arr[i] = temperature;
                 i++;
             }
         }
@@ -138,7 +138,7 @@ public class TemperatureSeriesAnalysis {
         int i = 0;
         for (double temperature:this.series) {
             if (temperature > tempValue) {
-                new_arr[i]=temperature;
+                new_arr[i] = temperature;
                 i++;
             }
         }
@@ -173,7 +173,7 @@ public class TemperatureSeriesAnalysis {
         this.series = newSeries;
 
         int i = 0;
-        for (int j = this.size; j<this.size+temps.length; j++) {
+        for (int j = this.size; j < this.size+temps.length; j++) {
             this.series[j] = temps[i];
             i++;
         }
