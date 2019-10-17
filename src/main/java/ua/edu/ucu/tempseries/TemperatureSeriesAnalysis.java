@@ -41,25 +41,25 @@ public class TemperatureSeriesAnalysis {
         return sum/this.series.length;
     }
 
-    public double deviation() {
+    public double deviation(){
         if (this.size == 0){
             throw new IllegalArgumentException("The series is empty");
         }
-        double dev_sum = 0.0;
+        double devSum = 0.0;
         double avg = this.average();
-        for (double temperature:this.series) {
-            dev_sum += Math.pow(temperature-avg, 2);
+        for (double temperature:this.series){
+            devSum += Math.pow(temperature-avg, 2);
         }
-        return Math.sqrt(dev_sum / this.size);
+        return Math.sqrt(devSum / this.size);
     }
 
     public double min() {
-        if (this.size == 0){
+        if (this.size==0) {
             throw new IllegalArgumentException("The series is empty");
         }
         double min = this.series[0];
-        for (double temperature:this.series){
-            if (temperature < min){
+        for (double temperature:this.series) {
+            if (temperature < min) {
                 min = temperature;
             }
         }
@@ -67,11 +67,11 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double max() {
-        if (this.size == 0){
+        if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
         double max = this.series[0];
-        for (double temperature:this.series){
+        for (double temperature:this.series) {
             if (temperature > max){
                 max = temperature;
             }
@@ -85,20 +85,19 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double findTempClosestToValue(double tempValue) {
-        if (this.size == 0){
+        if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
         double closest_dist = Math.abs(this.series[0]-tempValue);
         double closest_el = this.series[0];
-        for (double temperature:this.series){
+        for (double temperature:this.series) {
             if (Math.abs(temperature-tempValue) < closest_dist){
                 closest_el = temperature;
                 closest_dist = Math.abs(temperature-tempValue);
             }
-            else if(Math.abs(temperature-tempValue) == closest_dist){
-                if(temperature > 0){
-                    closest_el = temperature;
-                }
+            else if(Math.abs(temperature-tempValue) == closest_dist && temperature > 0) {
+                closest_el = temperature;
+
             }
         }
         return closest_el;
@@ -117,7 +116,7 @@ public class TemperatureSeriesAnalysis {
         double[] new_arr = new double[arr_size];
         int i = 0;
         for (double temperature:this.series) {
-            if (temperature < tempValue){
+            if (temperature < tempValue) {
                 new_arr[i]=temperature;
                 i++;
             }
@@ -126,7 +125,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
-        if (this.size == 0){
+        if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
         int arr_size = 0;
@@ -138,7 +137,7 @@ public class TemperatureSeriesAnalysis {
         double[] new_arr = new double[arr_size];
         int i = 0;
         for (double temperature:this.series) {
-            if (temperature > tempValue){
+            if (temperature > tempValue) {
                 new_arr[i]=temperature;
                 i++;
             }
@@ -148,7 +147,7 @@ public class TemperatureSeriesAnalysis {
 
 
     public TempSummaryStatistics summaryStatistics() {
-        if (this.size == 0){
+        if (this.size == 0) {
             throw new IllegalArgumentException("The series is empty");
         }
         double avg = this.average();
@@ -162,7 +161,7 @@ public class TemperatureSeriesAnalysis {
 
         while (this.capacity < this.size + temps.length) {
             this.capacity *= 2;
-            if (this.capacity == 0){
+            if (this.capacity == 0) {
                 this.capacity = 1;
             }
 
@@ -174,7 +173,7 @@ public class TemperatureSeriesAnalysis {
         this.series = newSeries;
 
         int i = 0;
-        for (int j = this.size; j<this.size+temps.length; j++){
+        for (int j = this.size; j<this.size+temps.length; j++) {
             this.series[j] = temps[i];
             i++;
         }
