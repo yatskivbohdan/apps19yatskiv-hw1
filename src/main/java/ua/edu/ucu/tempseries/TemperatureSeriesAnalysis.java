@@ -21,8 +21,8 @@ public class TemperatureSeriesAnalysis {
     public TemperatureSeriesAnalysis(double[] temperatureSeries) {
         for (double temperature:temperatureSeries) {
             if (temperature < MIN_TEMPERATURE) {
-                throw new InputMismatchException("There is a temperature " +
-                        "lower than the minimum possible");
+                throw new InputMismatchException("There is a temperature "
+                        + "lower than the minimum possible");
             }
         }
         this.capacity = temperatureSeries.length;
