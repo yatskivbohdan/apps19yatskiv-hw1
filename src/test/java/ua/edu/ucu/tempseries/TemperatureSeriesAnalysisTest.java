@@ -272,4 +272,71 @@ public class TemperatureSeriesAnalysisTest {
 
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
+
+    @Test
+    public void testStatisticsWithOneElementArray() {
+        double[] temperatureSeries = {-1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TempSummaryStatistics expResult = new TempSummaryStatistics(-1.0, 0.0, -1.0, -1.0);
+
+        TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
+
+        assertEquals(expResult.getAvgTemp(), actualResult.getAvgTemp(), 0.00001);
+        assertEquals(expResult.getDevTemp(), actualResult.getDevTemp(), 0.00001);
+        assertEquals(expResult.getMinTemp(), actualResult.getMinTemp(), 0.00001);
+        assertEquals(expResult.getMaxTemp(), actualResult.getMaxTemp(), 0.00001);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testStatisticsWithEmptyArray() {
+        double[] temperatureSeries = {};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+
+        // expect exception here
+        seriesAnalysis.summaryStatistics();
+    }
+
+    @Test
+    public void testStatistics() {
+        double[] temperatureSeries = {3.0, -5.0, 1.0, 5.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TempSummaryStatistics expResult = new TempSummaryStatistics(1.0, 3.742, -5.0, 5.0);
+
+        TempSummaryStatistics actualResult = seriesAnalysis.summaryStatistics();
+
+        assertEquals(expResult.getAvgTemp(), actualResult.getAvgTemp(), 0.00001);
+        assertEquals(expResult.getDevTemp(), actualResult.getDevTemp(), 0.001);
+        assertEquals(expResult.getMinTemp(), actualResult.getMinTemp(), 0.00001);
+        assertEquals(expResult.getMaxTemp(), actualResult.getMaxTemp(), 0.00001);
+    }
+
+    @Test
+    public void testAddTemps() {
+        double[] temperatureSeries = {0.0, 1.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double[] temps = {1.0, 2.0};
+        int expResult = 4;
+        int actualResult  = seriesAnalysis.addTemps(temps);
+        assertEquals(expResult, actualResult);
+    }
+
+    @Test
+    public void testAddTempsWithEmptyTemps() {
+        double[] temperatureSeries = {1.0, 2.0};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        int expResult = 2;
+        int actualResult  = seriesAnalysis.addTemps();
+        assertEquals(expResult, actualResult);
+    }
+
+    @Test
+    public void testAddTempsWithEmptyArray() {
+        double[] temperatureSeries = {};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        double[] temps = {1.0, 2.0};
+        int expResult = 2;
+        int actualResult  = seriesAnalysis.addTemps(temps);
+        assertEquals(expResult, actualResult);
+    }
+
 }
