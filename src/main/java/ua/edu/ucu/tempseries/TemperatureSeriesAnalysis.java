@@ -159,16 +159,20 @@ public class TemperatureSeriesAnalysis {
     }
 
     public int addTemps(double... temps) {
-        if (this.capacity - this.size < this.size + temps.length){
-            while (this.capacity - this.size < this.size + temps.length){
-                this.capacity *= 2;
+
+        while (this.capacity < this.size + temps.length) {
+            this.capacity *= 2;
+            if (this.capacity == 0){
+                this.capacity = 1;
             }
-            double[] newSeries = new double[this.capacity];
-            if (this.size >= 0) {
-                System.arraycopy(this.series, 0, newSeries, 0, this.size);
-            }
-            this.series = newSeries;
+
         }
+        double[] newSeries = new double[this.capacity];
+        if (this.size >= 0) {
+            System.arraycopy(this.series, 0, newSeries, 0, this.size);
+        }
+        this.series = newSeries;
+
         int i = 0;
         for (int j = this.size; j<this.size+temps.length; j++){
             this.series[j] = temps[i];
