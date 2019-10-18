@@ -114,8 +114,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testMinWithEmptyArray() {
-        double[] temperatureSeries = {};
-        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
 
         // expect exception here
         seriesAnalysis.min();
@@ -144,9 +143,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testClosestToZeroWithEmptyArray() {
-        double[] temperatureSeries = {};
-        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
-
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
         // expect exception here
         seriesAnalysis.findTempClosestToZero();
     }
@@ -186,8 +183,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testClosestToValueWithEmptyArray() {
-        double[] temperatureSeries = {};
-        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
 
         // expect exception here
         seriesAnalysis.findTempClosestToZero();
@@ -227,8 +223,7 @@ public class TemperatureSeriesAnalysisTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testLessThenWithEmptyArray() {
-        double[] temperatureSeries = {};
-        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
 
         // expect exception here
         seriesAnalysis.findTempsLessThen(1.0);
