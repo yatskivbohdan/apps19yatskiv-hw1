@@ -159,7 +159,7 @@ public class TemperatureSeriesAnalysis {
 
         }
         double[] newSeries = new double[this.capacity];
-        if (this.size >0) {
+        if (this.size > 0) {
             System.arraycopy(this.series, 0, newSeries, 0, this.size);
         }
         this.series = newSeries;
